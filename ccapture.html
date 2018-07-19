@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas>
+    <img width="100%" src="images/nina2.gif" alt="">
+  </canvas>
+  <button type="button" onclick="startCapture()">capture</button>
+  <button type="button" onclick="stopCapture()">save</button>
+  <script src="js/CCapture.all.min.js"></script>
+  <script src="js/Detector.js"></script>
+  <script type="text/javascript">
+    var capturer = new CCapture( {
+      format: 'webm',
+      verbose: true,
+      framerate: 24,
+      autoSaveTime: 0
+    });
+
+    function startCapture() {
+      // Create a capturer that exports a WebM video
+      capturer.start();
+    }
+
+    function stopCapture() {
+      capturer.stop();
+      capturer.save();
+    }
+  </script>
+</body>
+</html>

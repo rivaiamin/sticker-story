@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="bower_components/jquery-ui/themes/base/all.css">
+  <link rel="stylesheet" href="bower_components/semantic/dist/semantic.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #mainCanvas {
+      height: 100%;
+    }
+
+    .sticker-container {
+      display: inline-block;
+      position: absolute;
+      z-index: 10,
+    }
+
+    .sticker {
+      z-index: 10;
+    }
+
+    .cam {
+      position: absolute;
+      width: 100%;
+      z-index: 0;
+    }
+
+    .ui.button {
+      position: relative;
+      bottom: 0;
+      z-index: 10;
+      left: 45%;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="mainCanvas">
+    <div id="container">
+      <!-- <div class="sticker-container">
+        <img class="sticker" src="images/category/1.png" alt="">
+      </div> -->
+    </div>
+    <!-- <img src="images/photo.jpg" class="cam" alt=""> -->
+    <video class="cam" id="player" controls></video>
+  </div>
+
+  <button type="button" class="ui icon primary button" onClick="launchModal()"><i class="plus icon"></i></button>
+
+  <div class="ui basic modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Sticker
+    </div>
+    <div class="content">
+      <div class="ui tiny images">
+        <!-- <img src="images/category/1.png" alt="" class="ui image"> -->
+        <img src="images/sakola.gif" alt="" class="ui image">
+        <img src="images/doodle/1.gif" alt="" class="ui image">
+        <img src="images/dragonfly.gif" alt="" class="ui image">
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button">
+        cancel
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/semantic/dist/semantic.min.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+  <script src="js/jquery.ui.touch-punch.min.js"></script>
+  <script>
+    var player = document.getElementById('player');
+
+    var handleSuccess = function(stream) {
+      player.srcObject = stream;
+    };
+
+    navigator.mediaDevices.getUserMedia({
+      audio: false,
+      //video: true,
+      video: { facingMode: { exact: "environment" } }
+    }).then(handleSuccess);
+
+    function initSticker() {
+      $(".sticker-container").draggable();
+      $(".sticker").resizable();
+    }
+
+    /* $(function() {
+      initSticker();
+    }); */
+
+    function launchModal() {
+      $(".ui.modal").modal('show');
+    }
+
+    $(".ui.images>.ui.image").click(function() {
+      var html = '<div class="sticker-container" style="z-index:10"><img class="sticker" src="'+ $(this).attr("src") +'" width="200"></div>';
+      $("#container").append(html);
+      initSticker();
+      $(".ui.modal").modal('hide');
+    })
+
+  </script>
+</body>
+</html>

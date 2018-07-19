@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sakola Animate Story</title>
+</head>
+<body ng-app="animateStoryApp">
+    <div ng-controller="camCtrl">
+        <webcam channel="mainCam"
+          on-stream="onStream(stream)"
+          on-access-denied="onError(err)"
+          on-streaming="onSuccess()"
+          cameraid="1">
+      </webcam>
+      <button type="button" ng-click="startCapture()">capture</button>
+      <button type="button" ng-click="stopCapture()">save</button>
+    </div>
+
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/webcam/app/scripts/webcam.js"></script>
+    <script src="bower_components/ccapture.js/src/CCapture.js"></script>
+    <!-- Include WebM Writer if you want to export WebM -->
+    <script src="bower_components/ccapture.js/src/webm-writer-0.2.0.js"></script>
+    <!-- Include gifjs if you want to export GIF -->
+    <script src="bower_components/ccapture.js/src/gif.js"></script>
+    <!-- Include tar.js if you want to export PNG or JPEG -->
+    <script src="bower_components/ccapture.js/src/tar.js"></script>
+    <!-- Include download.js for easier file download -->
+    <script src="bower_components/ccapture.js/src/download.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
